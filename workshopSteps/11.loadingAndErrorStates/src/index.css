@@ -1,0 +1,23 @@
+.container {
+  padding: 5em 0em;
+}
+
+.column {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modals {
+  display: flex;
+  overflow: auto;
+}
+
+.ui.form .error.message {
+  display: block;
+}
