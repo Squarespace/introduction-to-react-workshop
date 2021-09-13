@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import FormInput from './FormInput';
-import { avatarNames } from '../utils/getAvatarUrl';
 import useProfileState from '../hooks/useProfileState';
+import FormInput from './FormInput';
 import AvatarSelection from './AvatarSelection';
+import { avatarNames } from '../utils/getAvatarUrl';
 
 import {
   createProfile,
+  updateProfile,
 } from '../api';
 
 const defaultState = {
@@ -37,23 +38,45 @@ const formInputConfigs = [
 export default function ProfileForm({
   setIsModalOpen,
 }) {
-  const [formState, setFormState] = useState(defaultState);
-
   const {
+    profiles,
     searchProfiles,
+    selectedProfileIndex,
+    setSelectedProfileIndex,
   } = useProfileState();
+
+  const selectedProfile = profiles[selectedProfileIndex];
+
+  const [formState, setFormState] = useState(selectedProfile || defaultState);
+
+  const isEditingProfile = formState.id !== undefined;
+
+  const profileAction = isEditingProfile ? 'Edit' : 'Create';
+
+  useEffect(() => {
+    return function unmount() {
+      searchProfiles();
+      setSelectedProfileIndex();
+    }
+  }, [
+    searchProfiles,
+    setSelectedProfileIndex,
+  ]);
 
   return (
     <>
-      <h2 className="ui dividing header">Create Profile</h2>
+      <h2 className="ui dividing header">{`${profileAction} Profile`}</h2>
       <form
         onSubmit={async (event) => {
           event.preventDefault();
 
+          const apiAction = isEditingProfile
+            ? updateProfile
+            : createProfile;
+
           try {
-            await createProfile(formState);
-            setFormState(defaultState);
-            searchProfiles();
+            await apiAction(formState);
+      
             setIsModalOpen(false);
           } catch(error) {
             console.log('error', error);

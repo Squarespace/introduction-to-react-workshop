@@ -4,16 +4,19 @@ import getAvatarUrl from '../utils/getAvatarUrl';
 import useProfileState from '../hooks/useProfileState';
 import { deleteProfile } from '../api';
 
-export default function ProfileGrid() {
+export default function ProfileGrid({
+  setIsModalOpen,
+}) {
   const {
     profiles,
     searchProfiles,
     searchTerm,
+    setSelectedProfileIndex,
   } = useProfileState();
 
   return (
     <div className="ui four stackable cards">
-      {profiles.map((profile) => {
+      {profiles.map((profile, index) => {
         const fullName = `${profile.firstName} ${profile.lastName}`;
 
         return (
@@ -37,6 +40,15 @@ export default function ProfileGrid() {
                 }}
               >
                 Delete
+              </button>
+              <button
+                className="ui primary button"
+                onClick={() => {
+                  setSelectedProfileIndex(index);
+                  setIsModalOpen(true);
+                }}
+              >
+                Edit
               </button>
             </div>
           </div>

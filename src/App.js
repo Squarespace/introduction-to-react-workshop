@@ -18,7 +18,7 @@ export default function App() {
           onClick={() => setIsModalOpen(true)}
         >Create Profile</button>
         <SearchForm />
-        <ProfileGrid />
+        <ProfileGrid setIsModalOpen={setIsModalOpen} />
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
           <ProfileForm setIsModalOpen={setIsModalOpen} />
         </Modal>

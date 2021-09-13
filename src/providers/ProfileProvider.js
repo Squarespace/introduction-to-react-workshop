@@ -16,6 +16,7 @@ export default function ProfileProvider({
 }) {
   const [profiles, setProfiles] = useState(emptyArray);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProfileIndex, setSelectedProfileIndex] = useState();
 
   async function searchProfiles(searchTerm = '') {
     try {
@@ -39,6 +40,8 @@ export default function ProfileProvider({
         searchProfiles,
         searchTerm,
         setSearchTerm,
+        selectedProfileIndex,
+        setSelectedProfileIndex,
       }}
     >
       {children}
