@@ -1,5 +1,3 @@
-// copy and paste this file to the main src directory
-
 import React, { useEffect } from 'react';
 
 // these are Semantic UI CSS classes that lock the scroll of the HTML <body>

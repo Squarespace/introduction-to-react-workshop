@@ -1,11 +1,7 @@
-## 08 Add A Modal
+## 09 Delete Profiles
 
-In this step, the code we are writing is within `src/App.js`
+In this step, the code we are writing is within `src/components/ProfileGrid.js`
 
-We will want to copy the `src/components/Modal.js` file over to the main `src/components` directory
-
-In this step we are copying the `Modal` component over
-to the main src directory and implementing it within `App`.
-This will render the profile form within a modal to free
-up some space in the UI. It also give us a chance to reuse
-the form for editing profiles in a follow-up step.
+In this step we are adding a delete button to the profile cards
+within the grid. On click, they will delete the profile from
+the `json-server` database.
