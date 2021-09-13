@@ -1,5 +1,3 @@
-// copy and paste this file to the main src directory
-
 import React from 'react';
 import classnames from 'classnames';
 
@@ -32,9 +30,6 @@ export default function AvatarSelection({
                 className={classnames('ui big label basic', {
                   teal: isChecked,
                 })}
-                // htmlFor functions the same as "for" does on an
-                // HTML <label>. Similar to "className", this avoids
-                // a naming conflict with the JS for loop
                 htmlFor={name}
               >
                 <i

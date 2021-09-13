@@ -34,7 +34,9 @@ const formInputConfigs = [
   },
 ];
 
-export default function ProfileForm() {
+export default function ProfileForm({
+  setIsModalOpen,
+}) {
   const [formState, setFormState] = useState(defaultState);
 
   const {
@@ -52,6 +54,7 @@ export default function ProfileForm() {
             await createProfile(formState);
             setFormState(defaultState);
             searchProfiles();
+            setIsModalOpen(false);
           } catch(error) {
             console.log('error', error);
           }
