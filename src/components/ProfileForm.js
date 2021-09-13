@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FormInput from './FormInput';
 import { avatarNames } from '../utils/getAvatarUrl';
 import useProfileState from '../hooks/useProfileState';
+import AvatarSelection from './AvatarSelection';
 
 import {
   createProfile,
@@ -15,8 +16,6 @@ const defaultState = {
   email: '',
 };
 
-// Having the FormInput configuration in an array
-// makes it easy to iterate over within the render
 const formInputConfigs = [
   {
     label: 'First Name',
@@ -51,11 +50,7 @@ export default function ProfileForm() {
 
           try {
             await createProfile(formState);
-            // We reset the form to the default state
-            // on success so we can start in a new profile
             setFormState(defaultState);
-            // We search the profiles again so that the
-            // new profile will be displayed in the grid
             searchProfiles();
           } catch(error) {
             console.log('error', error);
@@ -64,6 +59,17 @@ export default function ProfileForm() {
         className="ui form scrolling content"
         autoComplete="off"
       >
+        <AvatarSelection
+          selectedAvatar={formState.avatar}
+          onChange={(event) => {
+            setFormState((prevState) => {
+              return {
+                ...prevState,
+                avatar: event.target.value,
+              }
+            });
+          }}
+        />
         {formInputConfigs.map((formInputConfig) => {
           return (
             <FormInput

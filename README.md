@@ -1,12 +1,9 @@
-## 06 Create Profile
+## 07 Select Avatar
 
-In this step, the code we are writing is within these files:
-`src/App.js`
-`components/FormInput.js`
-`components/ProfileForm.js`
+In this step, the code we are writing is within `src/components/ProfileForm.js`
 
-In this step we add a form to create profiles, using
-similar techniques that we used in earlier steps.
-Note that the avatar is not customizeable yet.
-That functionality will be implemented in a
-follow-up step.
+We will want to copy the `src/components/AvatarSelection.js` file over to the main `src/components` directory
+
+In this step we are copying the `AvatarSelection` component over
+to the main src directory and implementing it within `ProfileForm`.
+This enabled selecting a custom avatar when creating profiles.
