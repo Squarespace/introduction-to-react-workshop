@@ -14,8 +14,6 @@ const emptyArray = [];
 export default function ProfileProvider({
   children,
 }) {
-  // This code is extracted from App and passed into
-  // the context value
   const [profiles, setProfiles] = useState(emptyArray);
   const [searchTerm, setSearchTerm] = useState('');
 

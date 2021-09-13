@@ -3,8 +3,6 @@ import React from 'react';
 import useProfileState from '../hooks/useProfileState';
 
 export default function SearchForm() {
-  // We pull in useProfileState, and switch from 
-  // using props to using the hook
   const {
     searchProfiles,
     searchTerm,

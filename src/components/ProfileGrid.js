@@ -4,8 +4,6 @@ import getAvatarUrl from '../utils/getAvatarUrl';
 import useProfileState from '../hooks/useProfileState';
 
 export default function ProfileGrid() {
-  // We pull in useProfileState, and switch from 
-  // using props to using the hook
   const {
     profiles,
   } = useProfileState();
