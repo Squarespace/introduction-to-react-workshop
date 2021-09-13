@@ -1,5 +1,3 @@
-// copy and paste this file over to the main src directory
-
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:3001/profiles/';
