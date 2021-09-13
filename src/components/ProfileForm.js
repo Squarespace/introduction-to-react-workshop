@@ -130,10 +130,6 @@ export default function ProfileForm({
           <button
             type="submit"
             className="ui button"
-            // This would prevent the user from rapid-fire
-            // submitting requests to create or update
-            // profiles. Since we close the modal
-            // immediately, we do not have this issue.
             disabled={status === requestStatus.PENDING}
           >Submit</button>
         </div>

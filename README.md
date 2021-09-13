@@ -1,9 +1,6 @@
-## 11 Loading and Error States
+## 12 Live Search
 
-In this step, the code we are writing is within these files:
-`src/components/ProfileGrid.js`
-`src/components/SearchForm.js`
-`src/providers/ProfileProvider.js`
+In this step, the code we are writing is within `src/components/SearchForm.js`
 
-In this step we are adding loading and error states to the UI
-in response to the async calls we are making to the server.
+In this step we are adding a debounced search-as-you-type to the
+profile search input. This completes the project in this workshop.

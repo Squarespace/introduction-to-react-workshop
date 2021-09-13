@@ -6,6 +6,8 @@ import {
   requestStatus,
 } from '../api';
 
+let timeoutId;
+
 export default function SearchForm() {
   const {
     profiles,
@@ -33,6 +35,16 @@ export default function SearchForm() {
             value={searchTerm}
             onChange={(event) => {
               setSearchTerm(event.target.value);
+
+              // We want to clear the existing timeout every time
+              // the user types something.
+              clearTimeout(timeoutId);
+
+              // We restart the timer for requesting profiles,
+              // so when the user stops typing the request will be made.
+              timeoutId = setTimeout(() => {
+                searchProfiles(event.target.value);
+              }, 250);
             }}
             className="prompt"
             autoComplete="off"
@@ -42,10 +54,6 @@ export default function SearchForm() {
           <i className="search icon" />
         </div>
       </div>
-      <button
-        className="ui primary button"
-        type="submit"
-      >Profile Search</button>
       {profiles.length === 0 && (
         <div className="ui message">No results for this search query</div>
       )}
