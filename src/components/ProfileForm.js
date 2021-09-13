@@ -8,6 +8,7 @@ import { avatarNames } from '../utils/getAvatarUrl';
 import {
   createProfile,
   updateProfile,
+  requestStatus,
 } from '../api';
 
 const defaultState = {
@@ -38,6 +39,8 @@ const formInputConfigs = [
 export default function ProfileForm({
   setIsModalOpen,
 }) {
+  const [status, setStatus] = useState(requestStatus.NONE);
+
   const {
     profiles,
     searchProfiles,
@@ -52,6 +55,7 @@ export default function ProfileForm({
   const isEditingProfile = formState.id !== undefined;
 
   const profileAction = isEditingProfile ? 'Edit' : 'Create';
+  const errorAction = isEditingProfile ? 'editing' : 'creating';
 
   useEffect(() => {
     return function unmount() {
@@ -69,7 +73,8 @@ export default function ProfileForm({
       <form
         onSubmit={async (event) => {
           event.preventDefault();
-
+          setStatus(requestStatus.PENDING);
+      
           const apiAction = isEditingProfile
             ? updateProfile
             : createProfile;
@@ -78,13 +83,19 @@ export default function ProfileForm({
             await apiAction(formState);
       
             setIsModalOpen(false);
+            setStatus(requestStatus.SUCCESS);
           } catch(error) {
-            console.log('error', error);
+            // in a production application, we would log this error message and map it
+            // to text we would like to display in the UI
+            setStatus(requestStatus.ERROR);
           }
         }}
         className="ui form scrolling content"
         autoComplete="off"
       >
+        {status === requestStatus.ERROR && (
+          <div className="ui error message">{`There was an error ${errorAction} the profile, please try again`}</div>
+        )}
         <AvatarSelection
           selectedAvatar={formState.avatar}
           onChange={(event) => {
@@ -119,6 +130,11 @@ export default function ProfileForm({
           <button
             type="submit"
             className="ui button"
+            // This would prevent the user from rapid-fire
+            // submitting requests to create or update
+            // profiles. Since we close the modal
+            // immediately, we do not have this issue.
+            disabled={status === requestStatus.PENDING}
           >Submit</button>
         </div>
       </form>

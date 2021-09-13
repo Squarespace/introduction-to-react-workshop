@@ -5,6 +5,7 @@ import React, {
 
 import {
   getProfiles,
+  requestStatus,
 } from '../api';
 
 export const ProfileContext = React.createContext(undefined);
@@ -17,14 +18,18 @@ export default function ProfileProvider({
   const [profiles, setProfiles] = useState(emptyArray);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedProfileIndex, setSelectedProfileIndex] = useState();
+  const [status, setStatus] = useState(requestStatus.NONE);
 
   async function searchProfiles(searchTerm = '') {
+    setStatus(requestStatus.PENDING);
+
     try {
       const result = await getProfiles(searchTerm);
       setProfiles(result.data);
       setSearchTerm(searchTerm);
+      setStatus(requestStatus.SUCCESS);
     } catch (error) {
-      console.log('error', error);
+      setStatus(requestStatus.ERROR);
     }
   };
 
@@ -42,6 +47,7 @@ export default function ProfileProvider({
         setSearchTerm,
         selectedProfileIndex,
         setSelectedProfileIndex,
+        status,
       }}
     >
       {children}

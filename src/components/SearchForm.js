@@ -1,12 +1,18 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import useProfileState from '../hooks/useProfileState';
+import {
+  requestStatus,
+} from '../api';
 
 export default function SearchForm() {
   const {
+    profiles,
     searchProfiles,
     searchTerm,
     setSearchTerm,
+    status,
   } = useProfileState();
 
   return (
@@ -18,7 +24,11 @@ export default function SearchForm() {
       }}
     >
       <div className="field">
-        <div className="ui icon input">
+        <div
+          className={classnames('ui icon input', {
+            loading: status === requestStatus.PENDING,
+          })}
+        >
           <input
             value={searchTerm}
             onChange={(event) => {
@@ -36,6 +46,9 @@ export default function SearchForm() {
         className="ui primary button"
         type="submit"
       >Profile Search</button>
+      {profiles.length === 0 && (
+        <div className="ui message">No results for this search query</div>
+      )}
     </form>
   );
 }
