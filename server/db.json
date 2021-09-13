@@ -1,0 +1,28 @@
+{
+  "profiles": [
+    {
+      "avatar": "steve",
+      "firstName": "Ewald",
+      "lastName": "Hane",
+      "email": "Brannon_Hackett@yahoo.com",
+      "createdAt": 1629903415755,
+      "id": 1
+    },
+    {
+      "avatar": "stevie",
+      "firstName": "Dillan",
+      "lastName": "Hagenes",
+      "email": "Tremaine95@gmail.com",
+      "createdAt": 1629903415755,
+      "id": 2
+    },
+    {
+      "avatar": "ade",
+      "firstName": "Kenyatta",
+      "lastName": "Jaskolski",
+      "email": "Laney.Kertzmann22@yahoo.com",
+      "createdAt": 1629903415755,
+      "id": 3
+    }
+  ]
+}
