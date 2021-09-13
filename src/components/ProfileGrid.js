@@ -1,15 +1,18 @@
 import React from 'react';
 
 import getAvatarUrl from '../utils/getAvatarUrl';
+import useProfileState from '../hooks/useProfileState';
 
-export default function ProfileGrid(props) {
+export default function ProfileGrid() {
+  // We pull in useProfileState, and switch from 
+  // using props to using the hook
+  const {
+    profiles,
+  } = useProfileState();
+
   return (
     <div className="ui four stackable cards">
-      {/*
-        Here we are rendering the list of profiles in a grid
-        https://reactjs.org/docs/lists-and-keys.html
-      */}
-      {props.profiles.map((profile) => {
+      {profiles.map((profile) => {
         const fullName = `${profile.firstName} ${profile.lastName}`;
 
         return (

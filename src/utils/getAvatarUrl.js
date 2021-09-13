@@ -1,5 +1,3 @@
-// copy and paste this file over to the main src directory
-
 export const avatarNames = [
   'ade',
   'chris',

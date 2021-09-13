@@ -1,20 +1,30 @@
 import React from 'react';
 
-export default function SearchForm(props) {
+import useProfileState from '../hooks/useProfileState';
+
+export default function SearchForm() {
+  // We pull in useProfileState, and switch from 
+  // using props to using the hook
+  const {
+    searchProfiles,
+    searchTerm,
+    setSearchTerm,
+  } = useProfileState();
+
   return (
     <form
       className="ui form container"
       onSubmit={(event) => {
         event.preventDefault();
-        props.searchProfiles(props.searchTerm);
+        searchProfiles(searchTerm);
       }}
     >
       <div className="field">
         <div className="ui icon input">
           <input
-            value={props.searchTerm}
+            value={searchTerm}
             onChange={(event) => {
-              props.setSearchTerm(event.target.value);
+              setSearchTerm(event.target.value);
             }}
             className="prompt"
             autoComplete="off"
