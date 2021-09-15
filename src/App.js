@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
 
+import {
+  getProfiles,
+} from './api';
+
+// Adding async before the function declaration lets us
+// use async await within the function. We can write asynchronous
+// code using syntax that looks synchronous, so we do not
+// end up with deeply nested code
+async function searchProfiles(searchTerm = '') {
+  // Wrapping async await function calls in a try catch
+  // gives us a chance to handle the error the way we choose
+  // to. This way we can dislpay an error in the UI rather than
+  // having it just appear in the browser console.
+  try {
+    const result = await getProfiles(searchTerm);
+    // For now we are just logging the result. We will use
+    // this data in follow-up steps.
+    console.log('status', result.data);
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export default function App() {
-  // This is our first use of useState. The React team chose
-  // to return an array so the consumer can name the state value
-  // and setState callback whatever they choose to within
-  // the Array destructuring
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <div className="ui main container">
-      {/*
-        note that we need to use className instead of class
-        class has another function within JS, so there is a naming conflict
-        className is what the React team chose to use instead
-      */}
       <h1 className="ui dividing header">Profiles</h1>
       <form
         className="ui form container"
         onSubmit={(event) => {
-          // we call event.preventDefault to stop the default bahavior
-          // of the form, which is to refresh the page with the form
-          // values included in the URL
           event.preventDefault();
-
-          // here we log the result of the search term to demonstrate 
-          // accessing a variable in scope within the callback
-          console.log(searchTerm);
+          searchProfiles(searchTerm);
         }}
       >
         <div className="field">
@@ -33,9 +41,6 @@ export default function App() {
             <input
               value={searchTerm}
               onChange={(event) => {
-                // we have access to the same event properties as
-                // when we bind an event listener in core JS
-                // we use that to access the value of the input
                 setSearchTerm(event.target.value);
               }}
               className="prompt"
